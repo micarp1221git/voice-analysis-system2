@@ -701,12 +701,10 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if st.button("各種サービスを見てみる", type="primary", use_container_width=True):
-                st.balloons()
-                st.success("予約フォームに移動します...")
-                # ここに予約フォームへのリンクや処理を追加
+        if st.button("各種サービスを見てみる", type="primary", use_container_width=True):
+            st.balloons()
+            st.success("予約フォームに移動します...")
+            # ここに予約フォームへのリンクや処理を追加
 
 if __name__ == "__main__":
     main()
