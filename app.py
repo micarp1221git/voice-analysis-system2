@@ -536,19 +536,21 @@ def main():
         color: #000000 !important;
     }
     
-    /* プライマリボタン（分析開始） */
+    /* プライマリボタン（分析開始） - 読みやすさ改善 */
     .stButton > button[type="submit"] {
         background-color: #1E3A8A !important;
         border: none !important;
         color: #FFFFFF !important;
         font-size: 1.1rem !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         border-radius: 8px !important;
         padding: 0.75rem 1.5rem !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
     }
     .stButton > button[type="submit"]:hover {
         background-color: #1E40AF !important;
         color: #FFFFFF !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
     }
     
     /* 通常のボタン */
