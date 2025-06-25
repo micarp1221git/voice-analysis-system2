@@ -912,7 +912,12 @@ def main():
         
         if st.button("各種サービスを見てみる", type="primary", use_container_width=True):
             st.balloons()
-            # ここに予約フォームへのリンクや処理を追加
+            # JavaScriptでリンクを開く
+            st.markdown("""
+            <script>
+            window.open('https://voice-mika.com/', '_blank');
+            </script>
+            """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
