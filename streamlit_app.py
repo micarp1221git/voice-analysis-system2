@@ -674,13 +674,17 @@ def main():
             
             st.markdown(f"""
             <a href="{share_url}" target="_blank" style="
-                display: inline-block;
+                display: block;
                 background-color: #1DA1F2;
                 color: white;
-                padding: 0.5rem 1rem;
-                border-radius: 6px;
+                padding: 0.75rem 1.5rem;
+                border-radius: 8px;
                 text-decoration: none;
                 font-weight: 600;
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 1.1rem;
             ">📤 Xでシェア</a>
             """, unsafe_allow_html=True)
         
