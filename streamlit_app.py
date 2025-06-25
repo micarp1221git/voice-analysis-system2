@@ -378,53 +378,48 @@ class VoiceAnalyzer:
 
     def create_share_text(self, name, metrics, diagnosis, total_score, level):
         """X(旧Twitter)シェア用のテキストを生成"""
-        # メトリクスをスコア順にソート
-        sorted_metrics = sorted(metrics.items(), key=lambda x: x[1], reverse=True)
         
-        # 表示順序：最上位、第2位、最下位、第3位
-        display_order = [
-            sorted_metrics[0],   # 最上位
-            sorted_metrics[1],   # 第2位
-            sorted_metrics[-1],  # 最下位
-            sorted_metrics[2]    # 第3位
-        ]
+        # 総合評価の星を生成（5つ星評価）
+        stars = int(total_score / 20)  # 100点満点を5つ星に変換
+        star_display = "⭐" * stars + "☆" * (5 - stars)
         
-        # AI診断から最初の一文を抽出（句点。…の形）
+        # AI診断から最初の一文を抽出
         first_sentence = diagnosis.split("。")[0] + "。"
-        if len(first_sentence) > 47:
-            first_sentence = first_sentence[:44] + "。"
+        if len(first_sentence) > 30:
+            first_sentence = first_sentence[:27] + "。"
         first_sentence += "…"
         
-        # 星とプログレスバーを作成
+        # プログレスバーを生成
         def create_progress_bar(score):
-            """スコアに基づいてプログレスバーと星を生成"""
-            stars = int(score / 20)  # 20点刻みで星を計算
-            star_text = "★" * stars + "☆" * (5 - stars)
-            
-            # プログレスバー（10ブロック）
-            filled = int(score / 10)
-            progress = "█" * filled + "░" * (10 - filled)
-            
-            return f"{star_text} {progress} {score}点"
+            filled = int(score / 10)  # 10ブロックで表示
+            return "■" * filled + "□" * (10 - filled)
         
-        share_text = f"""🎤 音声分析診断結果
-📊 総合スコア {total_score}/594点 (レベル{level})
-
-{first_sentence}
+        # メトリクス名の短縮版マッピング
+        short_names = {
+            'volume': '音量',
+            'clarity': '明瞭度', 
+            'pitch_stability': '音程',
+            'rhythm': '速さ',
+            'expression': '表現',
+            'resonance': '響き'
+        }
+        
+        share_text = f"""【AI音声分析結果】{star_display} {total_score}点
 
 """
         
-        # 各項目を表示（改行で4項目に分割）
-        for i, (metric_key, score) in enumerate(display_order):
-            metric_name = self.metrics_names[metric_key]
-            progress_text = create_progress_bar(score)
-            share_text += f"{metric_name} {progress_text}\n"
-            
-            # 2項目ごとに改行を追加
-            if i == 1:
-                share_text += "\n"
+        # 主要な4つの指標を表示（高いスコア順）
+        sorted_metrics = sorted(metrics.items(), key=lambda x: x[1], reverse=True)
+        main_metrics = sorted_metrics[:4]  # 上位4つを選択
         
-        share_text += "\n#音声分析 #AI診断 #ボイストレーニング"
+        for metric, score in main_metrics:
+            metric_name = short_names.get(metric, metric)
+            progress = create_progress_bar(score)
+            share_text += f"{metric_name}:{score}点 {progress}\n"
+        
+        share_text += f"\n{name[:-2]}さんの声は{first_sentence}\n\n"
+        share_text += "#声のAI分析\n"
+        share_text += "https://voice-analysis-app.streamlit.app"
         
         return share_text
 
