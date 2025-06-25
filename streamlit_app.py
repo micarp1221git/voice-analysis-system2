@@ -661,31 +661,8 @@ def main():
                 st.error(f"エラーが発生しました: {str(e)}")
                 return
     
-    # ビジネスCTAセクション
+    # 画像ダウンロードとシェアボタンを先に配置
     if st.session_state.analysis_complete:
-        st.markdown("---")
-        
-        # CTAボタンを大きく目立たせる
-        st.markdown("""
-        <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
-            <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
-            <p style="font-size: 18px; margin: 20px 0;">
-                AI分析の結果を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
-            </p>
-            <p style="font-size: 24px; font-weight: bold; color: #ff6b6b; margin: 20px 0;">
-                初回カウンセリング ¥9,800（通常¥15,000）
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if st.button("📞 無料相談を予約する", type="primary", use_container_width=True):
-                st.balloons()
-                st.success("予約フォームに移動します...")
-                # ここに予約フォームへのリンクや処理を追加
-        
-        # 画像ダウンロードとシェアボタンは控えめに配置
         st.markdown("---")
         st.markdown("### 📸 分析結果をシェア")
         
@@ -719,6 +696,29 @@ def main():
                     font-weight: 600;
                 ">📤 Xでシェア</a>
                 """, unsafe_allow_html=True)
+        
+        # ビジネスCTAセクションを最後に配置
+        st.markdown("---")
+        
+        # CTAボタンを大きく目立たせる
+        st.markdown("""
+        <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
+            <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
+            <p style="font-size: 18px; margin: 20px 0;">
+                AI分析の結果を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
+            </p>
+            <p style="font-size: 24px; font-weight: bold; color: #ff6b6b; margin: 20px 0;">
+                初回カウンセリング ¥9,800（通常¥15,000）
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            if st.button("📞 無料相談を予約する", type="primary", use_container_width=True):
+                st.balloons()
+                st.success("予約フォームに移動します...")
+                # ここに予約フォームへのリンクや処理を追加
 
 if __name__ == "__main__":
     main()
