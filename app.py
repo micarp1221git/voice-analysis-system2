@@ -898,17 +898,14 @@ def main():
         <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
             <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
             <p style="font-size: 18px; margin: 20px 0; color: #000000;">
-                AI分析の結果を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
-            </p>
-            <p style="font-size: 24px; font-weight: bold; color: #ff6b6b; margin: 20px 0;">
-                初回カウンセリング ¥9,800（通常¥15,000）
+                さらに詳しいAI分析を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
             </p>
         </div>
         """, unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("📞 無料相談を予約する", type="primary", use_container_width=True):
+            if st.button("📞 各種サービスを見てみる", type="primary", use_container_width=True):
                 st.balloons()
                 st.success("予約フォームに移動します...")
                 # ここに予約フォームへのリンクや処理を追加
