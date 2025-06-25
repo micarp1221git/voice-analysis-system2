@@ -666,36 +666,23 @@ def main():
         st.markdown("---")
         st.markdown("### 📸 分析結果をシェア")
         
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            if st.session_state.result_image:
-                st.download_button(
-                    label="📱 画像として保存",
-                    data=st.session_state.result_image,
-                    file_name=f"voice_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg",
-                    mime="image/jpeg",
-                    help="SNSでシェアできる画像として保存します"
-                )
-        
-        with col2:
-            if st.session_state.share_text:
-                # X(旧Twitter)用のシェアURL作成
-                import urllib.parse
-                encoded_text = urllib.parse.quote(st.session_state.share_text)
-                share_url = f"https://twitter.com/intent/tweet?text={encoded_text}"
-                
-                st.markdown(f"""
-                <a href="{share_url}" target="_blank" style="
-                    display: inline-block;
-                    background-color: #1DA1F2;
-                    color: white;
-                    padding: 0.5rem 1rem;
-                    border-radius: 6px;
-                    text-decoration: none;
-                    font-weight: 600;
-                ">📤 Xでシェア</a>
-                """, unsafe_allow_html=True)
+        if st.session_state.share_text:
+            # X(旧Twitter)用のシェアURL作成
+            import urllib.parse
+            encoded_text = urllib.parse.quote(st.session_state.share_text)
+            share_url = f"https://twitter.com/intent/tweet?text={encoded_text}"
+            
+            st.markdown(f"""
+            <a href="{share_url}" target="_blank" style="
+                display: inline-block;
+                background-color: #1DA1F2;
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 6px;
+                text-decoration: none;
+                font-weight: 600;
+            ">📤 Xでシェア</a>
+            """, unsafe_allow_html=True)
         
         # ビジネスCTAセクションを最後に配置
         st.markdown("---")
