@@ -479,15 +479,18 @@ def main():
         background-color: #1E3A8A !important;
         border-color: #1E3A8A !important;
         color: white !important;
-        font-size: 1.1rem !important;
-        padding: 0.75rem 1.5rem !important;
-        font-weight: 600 !important;
-        border-radius: 6px !important;
+        font-size: 1.3rem !important;
+        padding: 1rem 2rem !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+        min-height: 60px !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
         box-shadow: 0 4px 6px rgba(30, 58, 138, 0.3) !important;
     }
     .stButton > button[type="submit"]:hover {
         background-color: #1E40AF !important;
         border-color: #1E40AF !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
         transform: translateY(-1px) !important;
         box-shadow: 0 6px 8px rgba(30, 58, 138, 0.4) !important;
     }
@@ -677,14 +680,16 @@ def main():
                 display: block;
                 background-color: #1DA1F2;
                 color: white;
-                padding: 0.75rem 1.5rem;
+                padding: 1rem 2rem;
                 border-radius: 8px;
                 text-decoration: none;
                 font-weight: 600;
                 text-align: center;
                 width: 100%;
                 box-sizing: border-box;
-                font-size: 1.1rem;
+                font-size: 1.3rem;
+                min-height: 60px;
+                line-height: 28px;
             ">📤 Xでシェア</a>
             """, unsafe_allow_html=True)
         
