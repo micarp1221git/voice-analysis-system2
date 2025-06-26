@@ -474,7 +474,7 @@ def main():
     .stButton > button[type="submit"] {
         background-color: #1E3A8A !important;
         border-color: #1E3A8A !important;
-        color: white !important;
+        color: #FFFFFF !important;
         font-size: 1.3rem !important;
         padding: 1rem 2rem !important;
         font-weight: 700 !important;
@@ -483,9 +483,13 @@ def main():
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
         box-shadow: 0 4px 6px rgba(30, 58, 138, 0.3) !important;
     }
+    .stButton > button[type="submit"] * {
+        color: #FFFFFF !important;
+    }
     .stButton > button[type="submit"]:hover {
         background-color: #1E40AF !important;
         border-color: #1E40AF !important;
+        color: #FFFFFF !important;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
         transform: translateY(-1px) !important;
         box-shadow: 0 6px 8px rgba(30, 58, 138, 0.4) !important;
@@ -587,7 +591,7 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        submitted = st.form_submit_button("分析開始", type="primary", use_container_width=True)
+        submitted = st.form_submit_button("分析開始（1〜2分かかります）", type="primary", use_container_width=True)
     
     if submitted:
         # バリデーション

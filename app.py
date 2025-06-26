@@ -545,6 +545,9 @@ def main():
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
         min-height: 60px !important;
     }
+    .stButton > button[type="submit"] * {
+        color: #FFFFFF !important;
+    }
     .stButton > button[type="submit"]:hover {
         background-color: #1E40AF !important;
         color: #FFFFFF !important;
@@ -787,7 +790,7 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        submitted = st.form_submit_button("分析開始", type="primary", use_container_width=True)
+        submitted = st.form_submit_button("分析開始（1〜2分かかります）", type="primary", use_container_width=True)
     
     if submitted:
         # バリデーション
