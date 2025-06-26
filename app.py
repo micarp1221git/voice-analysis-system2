@@ -781,7 +781,7 @@ def main():
         
         # m4a変換の注意を分析開始ボタンの直前に配置
         st.markdown("""
-        <div style="background-color: #FFF3CD; padding: 10px; border-radius: 5px; margin: 10px 0;">
+        <div style="background-color: #FFFFFF; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #E0E0E0;">
         <strong>📌 注意</strong>: m4a、aacなどの形式は事前に変換が必要です<br>
         <a href="https://convertio.co/ja/m4a-mp3/" target="_blank">→ オンライン変換ツールはこちら</a>
         </div>
