@@ -355,7 +355,7 @@ class VoiceAnalyzer:
         
         share_text += f"\n{name[:-2]}さんの声は{first_sentence}\n\n"
         share_text += "#声のAI分析\n"
-        share_text += "https://voice-analysis-app.streamlit.app"
+        share_text += "https://voice-analysis-system2-sxar88bkqgcdahcqyttrg8.streamlit.app"
         
         return share_text
 
