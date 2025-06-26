@@ -4,13 +4,14 @@
 ✅ **完全動作版がタグ `v1.0-working` で保存済み**
 ✅ **改善UI版がタグ `v2.0-improved-ui` で保存済み**
 ✅ **完全UX版がタグ `v3.0-complete-ux` で保存済み**
-✅ **最終修正版がタグ `v3.1-final-fixes` で保存済み** ← 🆕 NEW!
+✅ **最終修正版がタグ `v3.1-final-fixes` で保存済み**
+✅ **本番運用版がタグ `v4.0-production-ready` で保存済み** ← 🆕 NEW!
 
 ## 復元方法
 
-### 1. 最新の最終修正版に戻したい場合（推奨）
+### 1. 最新の本番運用版に戻したい場合（推奨）
 ```bash
-git reset --hard v3.1-final-fixes
+git reset --hard v4.0-production-ready
 ```
 
 ### 2. 完全UX版に戻したい場合
@@ -30,13 +31,13 @@ git reset --hard v1.0-working
 
 ### 5. 特定のファイルだけ戻したい場合
 ```bash
-git checkout v3.1-final-fixes -- ファイル名
+git checkout v4.0-production-ready -- ファイル名
 ```
 
 例：
 ```bash
-git checkout v3.1-final-fixes -- app.py
-git checkout v3.1-final-fixes -- streamlit_app.py
+git checkout v4.0-production-ready -- app.py
+git checkout v4.0-production-ready -- streamlit_app.py
 ```
 
 ### 4. 現在の状態を確認
@@ -56,7 +57,7 @@ git commit -m "修正内容の説明"
 ### 7. セーフポイントに戻る前の確認
 ```bash
 git stash              # 現在の作業を一時保存
-git reset --hard v3.1-final-fixes  # 最新セーフポイントに戻る
+git reset --hard v4.0-production-ready  # 最新セーフポイントに戻る
 git stash pop          # 必要に応じて作業を復元
 ```
 
@@ -69,7 +70,15 @@ git stash pop          # 必要に応じて作業を復元
 
 ## セーフポイント履歴
 
-### v3.1-final-fixes (最新) 🆕
+### v4.0-production-ready (最新) 🆕
+- Streamlit Cloudデプロイ完了
+- 実際のデプロイURL反映済み
+- m4a変換案内最適配置
+- Xシェア文章重複修正済み
+- 分析時間明記（1〜2分）
+- 完全本番運用可能
+
+### v3.1-final-fixes
 - 5つ星評価システム修正済み（正しく5個表示）
 - CTAボタンリンク実装修正済み（確実に動作）
 - すべての機能が完全動作
@@ -93,7 +102,10 @@ git stash pop          # 必要に応じて作業を復元
 
 ## 緊急時のコマンド
 ```bash
-# 最新最終修正版に戻す（推奨）
+# 最新本番運用版に戻す（推奨）
+git reset --hard v4.0-production-ready
+
+# 最終修正版に戻す
 git reset --hard v3.1-final-fixes
 
 # 完全UX版に戻す
