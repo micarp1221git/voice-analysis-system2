@@ -702,14 +702,28 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("各種サービスを見てみる", type="primary", use_container_width=True):
-            st.balloons()
-            # JavaScriptでリンクを開く
-            st.markdown("""
-            <script>
-            window.open('https://voice-mika.com/', '_blank');
-            </script>
-            """, unsafe_allow_html=True)
+        # ボタンをリンクスタイルで実装
+        st.markdown("""
+        <a href="https://voice-mika.com/" target="_blank" style="
+            display: block;
+            background-color: #1E3A8A;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.3rem;
+            min-height: 60px;
+            line-height: 28px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        " onmouseover="this.style.backgroundColor='#1E40AF'" onmouseout="this.style.backgroundColor='#1E3A8A'">
+            各種サービスを見てみる
+        </a>
+        """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
