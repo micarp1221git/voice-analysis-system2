@@ -315,7 +315,8 @@ class VoiceAnalyzer:
         """X(旧Twitter)シェア用のテキストを生成"""
         
         # 総合評価の星を生成（5つ星評価）
-        stars = int(total_score / 20)  # 100点満点を5つ星に変換
+        # total_scoreは通常0-600点なので、120点刻みで5つ星に変換
+        stars = min(5, max(0, int(total_score / 120)))  # 600点満点を5つ星に変換
         star_display = "⭐" * stars + "☆" * (5 - stars)
         
         # AI診断から最初の一文を抽出
