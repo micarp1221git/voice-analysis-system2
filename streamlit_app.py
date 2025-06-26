@@ -542,6 +542,9 @@ def main():
     st.markdown("""
     あなたの声をAIが診断します。
     30秒以内の音声ファイルをアップロードしてください。
+    
+    **対応形式**: WAV、MP3  
+    **注意**: m4a、aacなどの形式は事前に変換が必要です（[オンライン変換ツール](https://convertio.co/ja/m4a-mp3/)）
     """)
     
     # セッション状態の初期化
@@ -576,7 +579,7 @@ def main():
         audio_file = st.file_uploader(
             "音声ファイルをアップロード",
             type=['wav', 'mp3'],
-            help="WAV、MP3ファイルをご利用ください（30秒以内）"
+            help="WAV、MP3ファイルをご利用ください（30秒以内）。m4aファイルは事前にMP3等に変換してください。"
         )
         
         submitted = st.form_submit_button("分析開始", type="primary", use_container_width=True)
