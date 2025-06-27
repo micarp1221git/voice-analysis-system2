@@ -69,7 +69,7 @@ class VoiceAnalyzer:
         non_silent = y[np.abs(y) > 0.01]
         if len(non_silent) > 0:
             rms_non_silent = np.sqrt(np.mean(non_silent**2))
-            volume_score = min(99, int(rms_non_silent * 2000))
+            volume_score = min(99, int(rms_non_silent * 1200))
         else:
             volume_score = 10
         metrics['volume'] = volume_score
