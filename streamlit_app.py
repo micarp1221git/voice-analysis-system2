@@ -69,7 +69,7 @@ class VoiceAnalyzer:
         non_silent = y[np.abs(y) > 0.01]
         if len(non_silent) > 0:
             rms_non_silent = np.sqrt(np.mean(non_silent**2))
-            volume_score = min(99, int(rms_non_silent * 500))
+            volume_score = min(99, int(rms_non_silent * 2000))
         else:
             volume_score = 10
         metrics['volume'] = volume_score
@@ -109,7 +109,7 @@ class VoiceAnalyzer:
         rms_frames = librosa.feature.rms(y=y, frame_length=2048, hop_length=512)[0]
         if np.mean(rms_frames) > 0:
             cv = np.std(rms_frames) / np.mean(rms_frames)
-            expression_score = min(95, max(30, int(cv * 200)))
+            expression_score = min(95, max(30, int(cv * 150)))
         else:
             expression_score = 30
         metrics['expression'] = expression_score
