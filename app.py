@@ -740,7 +740,7 @@ def main():
     </script>
     """, unsafe_allow_html=True)
     
-    st.title("🎤 AI音声分析システム")
+    st.title("🎤 AI音声分析システム（α版）")
     st.markdown("""
     あなたの声をAIが診断します。（長いファイルは冒頭30秒を分析します）
     """)
