@@ -24,7 +24,9 @@ class VoiceAnalyzer:
         
     def load_audio(self, audio_file):
         """音声ファイルを読み込む"""
+        print(f"ファイル名: {audio_file.name}")
         file_extension = audio_file.name.split(".")[-1].lower()
+        print(f"ファイル形式: {file_extension}")
         
         # M4Aファイルの場合は先にエラーメッセージを表示
         if file_extension == 'm4a':
@@ -269,6 +271,8 @@ class VoiceAnalyzer:
     
     def create_result_image(self, name, metrics, diagnosis, total_score, level, radar_fig):
         """結果を画像として出力（JPG形式）"""
+        # level_descを内部で再取得
+        _, level_desc = self.get_evaluation_level(total_score)
         # 画像サイズ
         width = 1080
         height = 1920
@@ -613,10 +617,14 @@ def main():
         with st.spinner('音声を分析中...'):
             try:
                 # 音声の読み込み
+                print("音声読み込み開始...")
                 y, sr, duration = analyzer.load_audio(audio_file)
+                print(f"音声読み込み完了: 長さ={len(y)}, サンプリングレート={sr}")
                 
                 # 音声分析
+                print("音声分析開始...")
                 metrics, y_trimmed, sr = analyzer.analyze_voice(y, sr, purpose)
+                print(f"音声分析完了: {metrics}")
                 
                 # AI診断
                 diagnosis, total_score, level, level_desc = analyzer.generate_diagnosis(metrics, purpose, formatted_name)
@@ -624,9 +632,6 @@ def main():
                 # シェア用テキストの生成
                 share_text = analyzer.create_share_text(formatted_name, metrics, diagnosis, total_score, level)
                 st.session_state.share_text = share_text
-                
-                # 結果表示
-                st.success("分析が完了しました！")
                 
                 # メトリクス表示
                 st.subheader("📊 分析結果")
@@ -660,12 +665,38 @@ def main():
                 st.subheader("🤖 AI診断")
                 st.info(diagnosis)
                 
+                # 波形解析への誘導
+                st.markdown("### 🔍 さらに詳しく分析")
+                st.markdown("**音声の波形やスペクトログラムで、より詳細な分析結果を確認できます**")
+                
+                # 波形とスペクトログラム（オプション）
+                with st.expander("📊 音声波形解析を表示（クリックで展開）", expanded=False):
+                    col1, col2 = st.columns(2)
+                    
+                    try:
+                        with col1:
+                            with st.spinner("波形を生成中..."):
+                                waveform_fig = analyzer.create_waveform(y_trimmed, sr)
+                                st.pyplot(waveform_fig)
+                                plt.close()
+                        
+                        with col2:
+                            with st.spinner("スペクトログラムを生成中..."):
+                                spectrogram_fig = analyzer.create_spectrogram(y_trimmed, sr)
+                                st.pyplot(spectrogram_fig)
+                                plt.close()
+                    except Exception as viz_error:
+                        st.warning(f"波形の表示でエラーが発生しました: {str(viz_error)}")
+                
                 # 結果画像の生成
                 result_image = analyzer.create_result_image(
                     formatted_name, metrics, diagnosis, total_score, level, radar_fig
                 )
                 st.session_state.result_image = result_image
                 st.session_state.analysis_complete = True
+                
+                # 完了メッセージを最後に表示
+                st.success("分析が完了しました！")
                 
             except Exception as e:
                 st.error(f"エラーが発生しました: {str(e)}")
