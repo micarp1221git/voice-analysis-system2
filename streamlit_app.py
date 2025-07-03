@@ -421,7 +421,7 @@ class VoiceAnalyzer:
             share_text += f"{metric_name}:{score}点 {progress}\n"
         
         share_text += f"\n{first_sentence}\n\n"
-        share_text += "#声のAI分析 @micarp\n"
+        share_text += "#声のAI分析\n"
         share_text += "https://voice-analysis-system2-sxar88bkqgcdahcqyttrg8.streamlit.app"
         
         return share_text
