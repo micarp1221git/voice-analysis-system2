@@ -798,5 +798,4 @@ def main():
         """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
-    main()# 更新確認用コメント
-# メンション追加確認
+    main()
