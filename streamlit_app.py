@@ -24,9 +24,7 @@ class VoiceAnalyzer:
         
     def load_audio(self, audio_file):
         """音声ファイルを読み込む"""
-        print(f"ファイル名: {audio_file.name}")
         file_extension = audio_file.name.split(".")[-1].lower()
-        print(f"ファイル形式: {file_extension}")
         
         # M4Aファイルの場合は先にエラーメッセージを表示
         if file_extension == 'm4a':
@@ -423,7 +421,7 @@ class VoiceAnalyzer:
             share_text += f"{metric_name}:{score}点 {progress}\n"
         
         share_text += f"\n{first_sentence}\n\n"
-        share_text += "#声のAI分析\n"
+        share_text += "#声のAI分析 @micarp\n"
         share_text += "https://voice-analysis-system2-sxar88bkqgcdahcqyttrg8.streamlit.app"
         
         return share_text
@@ -546,7 +544,7 @@ def main():
     </style>
     """, unsafe_allow_html=True)
     
-    st.title("🎤 AI音声分析システム")
+    st.title("🎤 AI音声分析システム（α版）")
     st.markdown("""
     あなたの声をAIが診断します。（長いファイルは冒頭30秒を分析します）
     """)
@@ -617,14 +615,10 @@ def main():
         with st.spinner('音声を分析中...'):
             try:
                 # 音声の読み込み
-                print("音声読み込み開始...")
                 y, sr, duration = analyzer.load_audio(audio_file)
-                print(f"音声読み込み完了: 長さ={len(y)}, サンプリングレート={sr}")
                 
                 # 音声分析
-                print("音声分析開始...")
                 metrics, y_trimmed, sr = analyzer.analyze_voice(y, sr, purpose)
-                print(f"音声分析完了: {metrics}")
                 
                 # AI診断
                 diagnosis, total_score, level, level_desc = analyzer.generate_diagnosis(metrics, purpose, formatted_name)
