@@ -791,11 +791,41 @@ def main():
         
         submitted = st.form_submit_button("分析開始（1〜2分かかります）", type="primary", use_container_width=True)
     
-    # テスト用：シンプルなCTA表示
+    # CTAセクションをフォーム外に配置
     st.markdown("---")
-    st.header("🎯 プロの指導で声を変えませんか？")
-    st.write("さらに詳しいAI分析を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。")
-    st.link_button("各種サービスを見てみる", "https://voice-mika.com/")
+    
+    # CTAボタンを大きく目立たせる
+    st.markdown("""
+    <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
+        <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
+        <p style="font-size: 18px; margin: 20px 0;">
+            さらに詳しいAI分析を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # ボタンをリンクスタイルで実装
+    st.markdown("""
+    <a href="https://voice-mika.com/" target="_blank" style="
+        display: block;
+        background-color: #1E3A8A;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1.3rem;
+        min-height: 60px;
+        line-height: 28px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    " onmouseover="this.style.backgroundColor='#1E40AF'" onmouseout="this.style.backgroundColor='#1E3A8A'">
+        各種サービスを見てみる
+    </a>
+    """, unsafe_allow_html=True)
     
     if submitted:
         # バリデーション
