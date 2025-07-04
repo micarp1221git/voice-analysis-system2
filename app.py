@@ -794,45 +794,52 @@ def main():
     # 分析中メッセージ表示用のプレースホルダー
     analysis_status = st.empty()
     
-    # CTAセクションを常に表示
-    st.markdown("---")
+    # 中間CTA表示用のプレースホルダー
+    intermediate_cta = st.empty()
     
-    # CTAボタンを大きく目立たせる
-    st.markdown("""
-    <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
-        <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
-        <p style="font-size: 18px; margin: 20px 0;">
-            さらに詳しいAI分析を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # ボタンをリンクスタイルで実装
-    st.markdown("""
-    <a href="https://voice-mika.com/" target="_blank" style="
-        display: block;
-        background-color: #1E3A8A;
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 700;
-        text-align: center;
-        width: 100%;
-        box-sizing: border-box;
-        font-size: 1.3rem;
-        min-height: 60px;
-        line-height: 28px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    " onmouseover="this.style.backgroundColor='#1E40AF'" onmouseout="this.style.backgroundColor='#1E3A8A'">
-        各種サービスを見てみる
-    </a>
-    """, unsafe_allow_html=True)
-    
-    # 分析完了メッセージと結果表示用のプレースホルダー
-    completion_status = st.empty()
+    # 結果表示用のプレースホルダー
     results_container = st.empty()
+    
+    # 最下段CTA表示用のプレースホルダー
+    bottom_cta = st.empty()
+    
+    # 初期状態でCTAを表示
+    if not submitted:
+        with intermediate_cta.container():
+            st.markdown("---")
+            
+            # CTAボタンを大きく目立たせる
+            st.markdown("""
+            <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
+                <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
+                <p style="font-size: 18px; margin: 20px 0;">
+                    さらに詳しいAI分析を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # ボタンをリンクスタイルで実装
+            st.markdown("""
+            <a href="https://voice-mika.com/" target="_blank" style="
+                display: block;
+                background-color: #1E3A8A;
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 700;
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 1.3rem;
+                min-height: 60px;
+                line-height: 28px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            " onmouseover="this.style.backgroundColor='#1E40AF'" onmouseout="this.style.backgroundColor='#1E3A8A'">
+                各種サービスを見てみる
+            </a>
+            """, unsafe_allow_html=True)
     
     if submitted:
         # バリデーション
@@ -851,8 +858,44 @@ def main():
         # 名前のフォーマット
         formatted_name = f"{name}さん"
         
-        # 分析中メッセージを表示
+        # 分析中メッセージを表示し、中間CTAも表示
         analysis_status.info("🔄 音声を分析中...")
+        
+        with intermediate_cta.container():
+            st.markdown("---")
+            
+            # CTAボタンを大きく目立たせる
+            st.markdown("""
+            <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
+                <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
+                <p style="font-size: 18px; margin: 20px 0;">
+                    さらに詳しいAI分析を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # ボタンをリンクスタイルで実装
+            st.markdown("""
+            <a href="https://voice-mika.com/" target="_blank" style="
+                display: block;
+                background-color: #1E3A8A;
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 700;
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+                font-size: 1.3rem;
+                min-height: 60px;
+                line-height: 28px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            " onmouseover="this.style.backgroundColor='#1E40AF'" onmouseout="this.style.backgroundColor='#1E3A8A'">
+                各種サービスを見てみる
+            </a>
+            """, unsafe_allow_html=True)
         
         # 分析処理
         try:
@@ -873,8 +916,9 @@ def main():
                 st.warning(f"シェア用テキスト生成でエラーが発生しました: {str(share_error)}")
                 st.session_state.share_text = ""
             
-            # 分析完了メッセージを表示
-            completion_status.success("✅ 分析が完了しました！")
+            # 分析完了時：分析中メッセージと中間CTAを削除
+            analysis_status.empty()
+            intermediate_cta.empty()
             
             # 結果をresults_containerに表示
             with results_container.container():
@@ -921,6 +965,43 @@ def main():
                     st.session_state.result_image = None
                 
                 st.session_state.analysis_complete = True
+                
+                # 最下段にCTAを表示
+                with bottom_cta.container():
+                    st.markdown("---")
+                    
+                    # CTAボタンを大きく目立たせる
+                    st.markdown("""
+                    <div style="background-color: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center;">
+                        <h2 style="color: #1f77b4;">🎯 プロの指導で声を変えませんか？</h2>
+                        <p style="font-size: 18px; margin: 20px 0;">
+                            さらに詳しいAI分析を基に、プロのボイストレーナーがあなたに最適なトレーニングプランを提案します。
+                        </p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # ボタンをリンクスタイルで実装
+                    st.markdown("""
+                    <a href="https://voice-mika.com/" target="_blank" style="
+                        display: block;
+                        background-color: #1E3A8A;
+                        color: white;
+                        padding: 1rem 2rem;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-weight: 700;
+                        text-align: center;
+                        width: 100%;
+                        box-sizing: border-box;
+                        font-size: 1.3rem;
+                        min-height: 60px;
+                        line-height: 28px;
+                        cursor: pointer;
+                        transition: background-color 0.3s;
+                    " onmouseover="this.style.backgroundColor='#1E40AF'" onmouseout="this.style.backgroundColor='#1E3A8A'">
+                        各種サービスを見てみる
+                    </a>
+                    """, unsafe_allow_html=True)
                 
         except Exception as e:
             st.error(f"エラーが発生しました: {str(e)}")
